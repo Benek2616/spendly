@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#10b981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Spendly</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💸</text></svg>">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Spendly</h1>
+      <p class="month" id="current-month"></p>
+    </header>
+
+    <!-- Podsumowanie -->
+    <section class="summary card">
+      <div class="summary-item">
+        <div class="label">Wydatki</div>
+        <div class="value expense" id="total-expense">0 zł</div>
+      </div>
+      <div class="divider"></div>
+      <div class="summary-item">
+        <div class="label">Liczba</div>
+        <div class="value" id="total-count">0</div>
+      </div>
+    </section>
+
+    <!-- Dodawanie -->
+    <section class="card">
+      <h2>Dodaj wydatek</h2>
+      <div class="form">
+        <input type="number" id="amount" placeholder="Kwota (zł)" inputmode="decimal" step="0.01" min="0">
+        <input type="text" id="title" placeholder="Na co? (np. Żabka, Uber)">
+        
+        <div class="categories" id="categories">
+          <button class="cat active" data-cat="jedzenie">🍔 Jedzenie</button>
+          <button class="cat" data-cat="transport">🚗 Transport</button>
+          <button class="cat" data-cat="zakupy">🛒 Zakupy</button>
+          <button class="cat" data-cat="rozrywka">🎬 Rozrywka</button>
+          <button class="cat" data-cat="zdrowie">💊 Zdrowie</button>
+          <button class="cat" data-cat="inne">📦 Inne</button>
+        </div>
+
+        <button id="add-btn" class="primary">Dodaj wydatek</button>
+      </div>
+    </section>
+
+    <!-- Lista -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Ostatnie wydatki</h2>
+        <button id="clear-btn" class="text-btn">Wyczyść miesiąc</button>
+      </div>
+      <div id="list" class="list"></div>
+    </section>
+
+    <!-- Kategorie podsumowanie -->
+    <section class="card" id="breakdown-card">
+      <h2>Podział na kategorie</h2>
+      <div id="breakdown"></div>
+    </section>
+
+    <footer>Spendly • Twoje dane zostają na telefonie</footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    }
+  </script>
+</body>
+</html>
